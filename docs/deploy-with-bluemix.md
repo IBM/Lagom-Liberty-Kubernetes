@@ -203,4 +203,3 @@ When you are finished testing the service in Bluemix, you can delete the service
 From here, you can try another option for running the example:
 
 - [Run in development mode](docs/run-in-development-mode.md)
-- [Deploy with Minikube](deploy-with-minikube.md)
