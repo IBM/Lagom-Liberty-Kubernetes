@@ -2,7 +2,7 @@
 
 Lagom has the flexibility to be deployed to a variety of production environments. For detailed information, see the documentation on [Running Lagom in Production](https://www.lagomframework.com/documentation/1.3.x/java/ProductionOverview.html).
 
-This guide demonstrates how to deploy the Lagom service to a Kubernetes cluster running in the cloud using [IBM Bluemix Container Service](https://www.ibm.com/cloud-computing/bluemix/containers). IBM Cloud offers Kubernetes clusters that can be used in production environments. It provides two options: Lite and Standard clusters. These instructions are designed to work with either type.
+This guide demonstrates how to deploy the Lagom service to a Kubernetes cluster running in the cloud using [IBM Cloud Container Service](https://www.ibm.com/cloud-computing/bluemix/containers). IBM Cloud offers Kubernetes clusters that can be used in production environments. It provides two options: Lite and Standard clusters. These instructions are designed to work with either type.
 
 ## Table of Contents
 
@@ -36,10 +36,10 @@ In addition to the [prerequisites outlined in `README.md`](../README.md#prerequi
 
 ## Create a Kubernetes cluster in IBM Cloud
 
-These instructions assume you have already installed, configured and logged in with the Bluemix CLI tools. If you already have a cluster in Bluemix, you can reuse it and skip to the next section. If this is your first time using Bluemix Container Service, please see [the official documentation](https://console.bluemix.net/docs/containers/cs_cluster.html#cs_cluster_cli) for detailed instructions on setting up clusters.
+These instructions assume you have already installed, configured and logged in with the IBM Cloud CLI tools. If you already have a cluster in IBM Cloud, you can reuse it and skip to the next section. If this is your first time using IBM Cloud Container Service, please see [the official documentation](https://console.bluemix.net/docs/containers/cs_cluster.html#cs_cluster_cli) for detailed instructions on setting up clusters.
 
 1.  Open a new command line shell to clear you environment, and change to the `lagom-message-hub-liberty-integration-example` directory.
-2.  Create a Lite Kubernetes cluster in Bluemix.
+2.  Create a Lite Kubernetes cluster in IBM Cloud.
     ```
     bx cs cluster-create --name lagom-test
     ```
@@ -55,12 +55,12 @@ These instructions assume you have already installed, configured and logged in w
     ```
     This command prints another command to run to set your `KUBECONFIG` environment variable. Copy and run that command.
 
-## Create a container registry namespace in Bluemix
+## Create a container registry namespace in IBM Cloud
 
-You will need to use a private container registry to provide the Docker image to your Kubernetes cluster. These instructions assume you have already installed, configured and logged in with the Bluemix CLI tools. If this is your first time using Bluemix Container Registry, please see [the official documentation](https://console.bluemix.net/docs/services/Registry/index.html) for detailed instructions on creating registry namespaces.
+You will need to use a private container registry to provide the Docker image to your Kubernetes cluster. These instructions assume you have already installed, configured and logged in with the IBM Cloud CLI tools. If this is your first time using IBM Cloud Container Registry, please see [the official documentation](https://console.bluemix.net/docs/services/Registry/index.html) for detailed instructions on creating registry namespaces.
 
 1.  Choose a namespace to use. Container registry namespaces must be globally unique, so it's best to choose a name that is unlikely to conflict with others, such as one that includes the name of your organization. In the steps below, replace all occurrences of the text "`<registry-namespace>`" with your chosen namespace.
-2.  Create the namespace in Bluemix:
+2.  Create the namespace in IBM Cloud:
     ```
     bx cr login
     bx cr namespace-add <registry-namespace>
@@ -68,7 +68,7 @@ You will need to use a private container registry to provide the Docker image to
 3.  In a text editor, open the file at `kubernetes/lagom-message-hub-liberty-integration/bluemix/lagom-message-hub-liberty-integration-statefulset.json`
 4.  In that file, find the `"image"` key and update the value to use your chosen namespace: `"registry.ng.bluemix.net/<registry-namespace>/lagom/message-hub-liberty-integration-impl"`
 
-## Build the Docker image for Bluemix
+## Build the Docker image for IBM Cloud
 
 1.  Build the Docker image locally:
     ```
@@ -162,7 +162,7 @@ From a WebSocket client, you can monitor the stream of messages that the Lagom s
 
 ### Test producing a message from the Liberty sample application
 
-1.  In another browser window or tab, navigate to the URL of the Liberty application deployed to Bluemix, and click the **Produce a Message** button.
+1.  In another browser window or tab, navigate to the URL of the Liberty application deployed to IBM Cloud, and click the **Produce a Message** button.
 2.  Return to the WebSocket Echo Test tab in your browser.
 3.  Within a few seconds, you should see the message produced from the Liberty application in the **Log** panel.
 
@@ -173,27 +173,27 @@ From a WebSocket client, you can monitor the stream of messages that the Lagom s
 3.  Return to the Liberty application tab in your browser, and reload the page.
 4.  You should see the message you sent in the list of **Already consumed messages**.
 
-## Delete the Lagom service from Bluemix
+## Delete the Lagom service from IBM Cloud
 
-When you are finished testing the service in Bluemix, you can delete the service from the Kubernetes cluster.
+When you are finished testing the service in IBM Cloud, you can delete the service from the Kubernetes cluster.
 
 1.  If the `kubectl port-forward ...` command is still running, press control-C to exit it.
-1.  Delete the Lagom service resources from the Kubernetes cluster in Bluemix:
+1.  Delete the Lagom service resources from the Kubernetes cluster in IBM Cloud:
     ```
     kubectl delete statefulsets lagom-message-hub-liberty-integration --cascade=false
     kubectl delete --ignore-not-found=true -f kubernetes/lagom-message-hub-liberty-integration/bluemix
     ```
-    As noted above, only one instance of the Lagom service can consume messages from the Message Hub topic at a time, so if the service is left running in Bluemix, you will not be able to test it successfully in Minikube or the Lagom development environment.
+    As noted above, only one instance of the Lagom service can consume messages from the Message Hub topic at a time, so if the service is left running in IBM Cloud, you will not be able to test it successfully in Minikube or the Lagom development environment.
 2.  (Optional) Delete the Cassandra service from the Kubernetes cluster:
     ```
     kubectl delete -f kubernetes/cassandra
     ```
-3.  (Optional) Delete the Kubernetes cluster from Bluemix Container Service:
+3.  (Optional) Delete the Kubernetes cluster from IBM Cloud Container Service:
     ```
     bx cs cluster-rm lagom-test
     ```
     Keep in mind that this will remove *all* resources in the cluster, and that clusters can take a long time to recreate. Only delete the cluster when you are sure you won't need it again.
-4.  (Optional) Delete the namespace you created from Bluemix Container Registry:
+4.  (Optional) Delete the namespace you created from IBM Cloud Container Registry:
     ```
     bx cr namespace-rm <registry-namespace>
     ```
