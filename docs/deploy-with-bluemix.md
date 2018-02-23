@@ -1,22 +1,22 @@
-# Deploy the Lagom Message Hub Liberty integration example with IBM Bluemix Container Service
+# Deploy the Lagom Message Hub Liberty integration example with IBM Cloud Container Service
 
 Lagom has the flexibility to be deployed to a variety of production environments. For detailed information, see the documentation on [Running Lagom in Production](https://www.lagomframework.com/documentation/1.3.x/java/ProductionOverview.html).
 
-This guide demonstrates how to deploy the Lagom service to a Kubernetes cluster running in the cloud using [IBM Bluemix Container Service](https://www.ibm.com/cloud-computing/bluemix/containers). Bluemix offers Kubernetes clusters that can be used in production environments. It provides two options: Lite and Standard clusters. These instructions are designed to work with either type.
+This guide demonstrates how to deploy the Lagom service to a Kubernetes cluster running in the cloud using [IBM Bluemix Container Service](https://www.ibm.com/cloud-computing/bluemix/containers). IBM Cloud offers Kubernetes clusters that can be used in production environments. It provides two options: Lite and Standard clusters. These instructions are designed to work with either type.
 
 ## Table of Contents
 
 1.  [Prerequisites](#prerequisites)
-2.  [Create a Kubernetes cluster in Bluemix](#create-a-kubernetes-cluster-in-bluemix)
-3.  [Create a container registry namespace in Bluemix](#create-a-container-registry-namespace-in-bluemix)
-4.  [Build the Docker image for Bluemix](#build-the-docker-image-for-bluemix)
-5.  [Deploy Cassandra to Bluemix](#deploy-cassandra-to-bluemix)
-6.  [Deploy the Lagom service to Bluemix](#deploy-the-lagom-service-to-bluemix)
+2.  [Create a Kubernetes cluster in IBM Cloud](#create-a-kubernetes-cluster-in-bluemix)
+3.  [Create a container registry namespace in IBM Cloud](#create-a-container-registry-namespace-in-bluemix)
+4.  [Build the Docker image for IBM Cloud](#build-the-docker-image-for-bluemix)
+5.  [Deploy Cassandra to IBM Cloud](#deploy-cassandra-to-bluemix)
+6.  [Deploy the Lagom service to IBM Cloud](#deploy-the-lagom-service-to-bluemix)
 7.  [Test the Lagom service in Minikube](#test-the-lagom-service-in-minikube)
     1.  [Connect to the Lagom message stream](#connect-to-the-lagom-message-stream)
     2.  [Test producing a message from the Liberty sample application](#test-producing-a-message-from-the-liberty-sample-application)
     3.  [Test producing a message from the Lagom service](#test-producing-a-message-from-the-lagom-service)
-8.  [Delete the Lagom service from Bluemix](#delete-the-lagom-service-from-bluemix)
+8.  [Delete the Lagom service from IBM Cloud](#delete-the-lagom-service-from-bluemix)
 9.  [Next steps](#next-steps)
 
 
@@ -26,15 +26,15 @@ Before performing the following steps, follow the instructions in [`README.md`](
 
 If this is not the first time you have run the Lagom Message Hub Liberty integration example service, ensure that you have stopped all other running copies that are configured with the same Message Hub service. Only one instance of the Lagom service can read from your sample application topic in the Message Hub service at one time, due to the way Kafka assigns partitions to consumers. In a realistic production application, you can create partitioned topics to allow multiple instances of a consumer to balance the load of processing a topic. See the [Kafka documentation](http://kafka.apache.org/documentation/) for detailed information on how topic partitions are assigned to consumers.
 
-In addition to the [prerequisites outlined in `README.md`](../README.md#prerequisites), you will need to install the following software to deploy to Bluemix:
+In addition to the [prerequisites outlined in `README.md`](../README.md#prerequisites), you will need to install the following software to deploy to IBM Cloud:
 
 - [Docker](https://www.docker.com/)
 - [Kubernetes CLI (`kubectl`)](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
-- [Bluemix CLI](https://clis.ng.bluemix.net/ui/home.html)
-- [Bluemix Container Service plug-in](https://console.bluemix.net/docs/containers/cs_cli_install.html#cs_cli_install)
-- [Bluemix Container Registry plug-in](https://console.bluemix.net/docs/services/Registry/registry_setup_cli_namespace.html#registry_setup_cli_namespace)
+- [IBM Cloud CLI](https://clis.ng.bluemix.net/ui/home.html)
+- [IBM Cloud Container Service plug-in](https://console.bluemix.net/docs/containers/cs_cli_install.html#cs_cli_install)
+- [IBM Cloud Container Registry plug-in](https://console.bluemix.net/docs/services/Registry/registry_setup_cli_namespace.html#registry_setup_cli_namespace)
 
-## Create a Kubernetes cluster in Bluemix
+## Create a Kubernetes cluster in IBM Cloud
 
 These instructions assume you have already installed, configured and logged in with the Bluemix CLI tools. If you already have a cluster in Bluemix, you can reuse it and skip to the next section. If this is your first time using Bluemix Container Service, please see [the official documentation](https://console.bluemix.net/docs/containers/cs_cluster.html#cs_cluster_cli) for detailed instructions on setting up clusters.
 
@@ -80,13 +80,13 @@ You will need to use a private container registry to provide the Docker image to
     docker push registry.ng.bluemix.net/<registry-namespace>/lagom/message-hub-liberty-integration-impl
     ```
 
-## Deploy Cassandra to Bluemix
+## Deploy Cassandra to IBM Cloud
 
 1.  If you are using an existing Kubernetes cluster, check if the Cassandra service has already been deployed:
     ```
     kubectl get service cassandra
     ```
-    If this prints "`services "cassandra" not found`" then proceed. If there is an existing service, you can skip this section and move on to [Deploy the Lagom service to Bluemix](#deploy-the-lagom-service-to-bluemix).
+    If this prints "`services "cassandra" not found`" then proceed. If there is an existing service, you can skip this section and move on to [Deploy the Lagom service to IBM Cloud](#deploy-the-lagom-service-to-bluemix).
 2.  Create the Cassandra pod in Kubernetes:
     ```
     kubectl create -f kubernetes/cassandra
@@ -117,7 +117,7 @@ You will need to use a private container registry to provide the Docker image to
     UN  172.17.0.4  99.47 KiB  32           100.0%            f4d1adaa-89d7-4726-8081-f7a15be676ee  Rack1-K8Demo
     ```
 
-## Deploy the Lagom service to Bluemix
+## Deploy the Lagom service to IBM Cloud
 
 1.  Create the Lagom service pod in Kubernetes:
     ```
