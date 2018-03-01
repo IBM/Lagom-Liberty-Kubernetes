@@ -1,8 +1,10 @@
 # Lagom integration with IBM Message Hub and WebSphere Liberty
 
+Lagom is a framework for developing reactive microservices in Java or Scala. Created by Lightbend, Lagom is built on the proven Akka toolkit and Play Framework, and provides a highly productive, guided path for creating responsive, resilient, elastic, message-driven applications.
+
 [IBM Message Hub](https://www.ibm.com/software/products/en/ibm-message-hub) is a fully-managed Apache Kafka service running on the IBM Cloud PaaS. It exposes a native Kafka interface, so Lagom services can communicate with it using the standard Lagom Message Broker API.
 
-This project demonstrates a simple service that integrates with the IBM Message Hub Kafka [Liberty sample application](https://github.com/ibm-messaging/message-hub-samples/tree/master/kafka-java-liberty-sample). The source code demonstrates how to write a Lagom service that can both consume messages produced by the Liberty sample application, and produce messages that can be consumed by it. You can run the service in a local development environment, a local Kubernetes cluster created using [Minikube](https://kubernetes.io/docs/getting-started-guides/minikube/), or in the cloud using [IBM Cloud Container Service](https://www.ibm.com/cloud-computing/bluemix/containers).
+This project demonstrates a simple service that integrates with the IBM Message Hub Kafka [Liberty sample application](https://github.com/ibm-messaging/message-hub-samples/tree/master/kafka-java-liberty-sample). The source code demonstrates how to write a Lagom service that can both consume messages produced by the Liberty sample application, and produce messages that can be consumed by it. You can run the service in a local development environment, a local Kubernetes cluster created using IBM Cloud Private [ICP](https://www.ibm.com/cloud-computing/products/ibm-cloud-private/), or in the cloud using [IBM Cloud Container Service](https://www.ibm.com/cloud-computing/bluemix/containers).
 
 ## Steps
 
