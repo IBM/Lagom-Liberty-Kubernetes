@@ -4,7 +4,7 @@
 
 This project demonstrates a simple service that integrates with the IBM Message Hub Kafka [Liberty sample application](https://github.com/ibm-messaging/message-hub-samples/tree/master/kafka-java-liberty-sample). The source code demonstrates how to write a Lagom service that can both consume messages produced by the Liberty sample application, and produce messages that can be consumed by it. You can run the service in a local development environment, a local Kubernetes cluster created using [Minikube](https://kubernetes.io/docs/getting-started-guides/minikube/), or in the cloud using [IBM Cloud Container Service](https://www.ibm.com/cloud-computing/bluemix/containers).
 
-## Table of Contents
+## Steps
 
 1.  [Prerequisites](#prerequisites)
 2.  [Gather Message Hub credentials](#gather-message-hub-credentials)
