@@ -59,4 +59,4 @@ Now that the project has been downloaded and configured, you can proceed to runn
 
 - [Run in development mode](docs/run-in-development-mode.md)
 - [Deploy to IBM Cloud Private](docs/deploy-with-icp.md)
-- [Deploy to IBM Cloud](docs/deploy-with-bluemix.md)
+- [Deploy to IBM Cloud Container Service](docs/deploy-with-bluemix.md)
