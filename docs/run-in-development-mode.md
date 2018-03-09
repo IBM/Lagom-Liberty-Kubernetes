@@ -76,7 +76,7 @@ Press "Enter" in the console running the Lagom development environment to stop t
 
 ## Next steps
 
-From here, you can proceed to deploy the service to a Kubernetes cluster using [Minikube](https://kubernetes.io/docs/getting-started-guides/minikube/) or [IBM Bluemix Container Service](https://www.ibm.com/cloud-computing/bluemix/containers).
+From here, you can proceed to deploy the service to a Kubernetes cluster using [IBM Cloud Private](https://www.ibm.com/cloud-computing/products/ibm-cloud-private/) or [IBM Bluemix Container Service](https://www.ibm.com/cloud-computing/bluemix/containers).
 
 - [Deploy with Bluemix](deploy-with-bluemix.md)
 - [Deploy in IBM Cloud Private](deploy-icp.md)
