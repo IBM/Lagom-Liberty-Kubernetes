@@ -1,74 +1,33 @@
-# Deploy the Lagom Message Hub Liberty integration example with IBM Cloud Container Service
+# Deploy the Lagom Message Hub Liberty integration example with IBM Cloud Private
 
 Lagom has the flexibility to be deployed to a variety of production environments. For detailed information, see the documentation on [Running Lagom in Production](https://www.lagomframework.com/documentation/1.3.x/java/ProductionOverview.html).
 
-This guide demonstrates how to deploy the Lagom service to a Kubernetes cluster running in the cloud using [IBM Cloud Container Service](https://www.ibm.com/cloud-computing/bluemix/containers). IBM Cloud offers Kubernetes clusters that can be used in production environments. It provides two options: Lite and Standard clusters. These instructions are designed to work with either type.
+This guide demonstrates how to deploy the Lagom service to a Kubernetes cluster running in the cloud using [IBM Cloud Private](https://www.ibm.com/cloud-computing/products/ibm-cloud-private/)**(ICP)**. 
 
 ## Table of Contents
 
-1.  [Prerequisites](#prerequisites)
-2.  [Create a Kubernetes cluster in IBM Cloud](#create-a-kubernetes-cluster-in-bluemix)
-3.  [Create a container registry namespace in IBM Cloud](#create-a-container-registry-namespace-in-bluemix)
-4.  [Build the Docker image for IBM Cloud](#build-the-docker-image-for-bluemix)
-5.  [Deploy Cassandra to IBM Cloud](#deploy-cassandra-to-bluemix)
-6.  [Deploy the Lagom service to IBM Cloud](#deploy-the-lagom-service-to-bluemix)
-7.  [Test the Lagom service in Minikube](#test-the-lagom-service-in-minikube)
+1.  [Install IBM Cloud Private](#install-ibm-cloud-private)
+2.  [Build the Docker image](#build-the-docker-image)
+3.  [Deploy Cassandra to ICP](#deploy-cassandra-to-icp)
+4.  [Deploy the Lagom service to ICP](#deploy-the-lagom-service-to-icp)
+5.  [Test the Lagom service in ICP](#test-the-lagom-service-in-icp)
     1.  [Connect to the Lagom message stream](#connect-to-the-lagom-message-stream)
     2.  [Test producing a message from the Liberty sample application](#test-producing-a-message-from-the-liberty-sample-application)
     3.  [Test producing a message from the Lagom service](#test-producing-a-message-from-the-lagom-service)
-8.  [Delete the Lagom service from IBM Cloud](#delete-the-lagom-service-from-bluemix)
-9.  [Next steps](#next-steps)
+6.  [Delete the Lagom service from ICP](#delete-the-lagom-service-from-icp)
+7.  [Next steps](#next-steps)
 
 
-## Prerequisites
+**Before performing the following steps, follow the instructions in**[`README.md`](../README.md).
 
-Before performing the following steps, follow the instructions in [`README.md`](../README.md).
+## Install IBM Cloud Private
 
-If this is not the first time you have run the Lagom Message Hub Liberty integration example service, ensure that you have stopped all other running copies that are configured with the same Message Hub service. Only one instance of the Lagom service can read from your sample application topic in the Message Hub service at one time, due to the way Kafka assigns partitions to consumers. In a realistic production application, you can create partitioned topics to allow multiple instances of a consumer to balance the load of processing a topic. See the [Kafka documentation](http://kafka.apache.org/documentation/) for detailed information on how topic partitions are assigned to consumers.
+Follow the [instruction](https://github.com/IBM/deploy-ibm-cloud-private)
+Make sure in the `Accessing IBM Cloud Private` section, change the cluster name from `mycluster.icp` to `lagom-test`.
 
-In addition to the [prerequisites outlined in `README.md`](../README.md#prerequisites), you will need to install the following software to deploy to IBM Cloud:
+## Build the Docker image
 
-- [Docker](https://www.docker.com/)
-- [Kubernetes CLI (`kubectl`)](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
-- [IBM Cloud CLI](https://clis.ng.bluemix.net/ui/home.html)
-- [IBM Cloud Container Service plug-in](https://console.bluemix.net/docs/containers/cs_cli_install.html#cs_cli_install)
-- [IBM Cloud Container Registry plug-in](https://console.bluemix.net/docs/services/Registry/registry_setup_cli_namespace.html#registry_setup_cli_namespace)
-
-## Create a Kubernetes cluster in IBM Cloud
-
-These instructions assume you have already installed, configured and logged in with the IBM Cloud CLI tools. If you already have a cluster in IBM Cloud, you can reuse it and skip to the next section. If this is your first time using IBM Cloud Container Service, please see [the official documentation](https://console.bluemix.net/docs/containers/cs_cluster.html#cs_cluster_cli) for detailed instructions on setting up clusters.
-
-1.  Open a new command line shell to clear you environment, and change to the `lagom-message-hub-liberty-integration-example` directory.
-2.  Create a Lite Kubernetes cluster in IBM Cloud.
-    ```
-    bx cs cluster-create --name lagom-test
-    ```
-3.  Wait for the cluster to be deployed and its worker to be provisioned:
-    ```
-    bx cs clusters
-    bx cs workers lagom-test
-    ```
-    This can take from several minutes up to an hour to complete.
-4.  Configure your environment to use the cluster:
-    ```
-    bx cs cluster-config lagom-test
-    ```
-    This command prints another command to run to set your `KUBECONFIG` environment variable. Copy and run that command.
-
-## Create a container registry namespace in IBM Cloud
-
-You will need to use a private container registry to provide the Docker image to your Kubernetes cluster. These instructions assume you have already installed, configured and logged in with the IBM Cloud CLI tools. If this is your first time using IBM Cloud Container Registry, please see [the official documentation](https://console.bluemix.net/docs/services/Registry/index.html) for detailed instructions on creating registry namespaces.
-
-1.  Choose a namespace to use. Container registry namespaces must be globally unique, so it's best to choose a name that is unlikely to conflict with others, such as one that includes the name of your organization. In the steps below, replace all occurrences of the text "`<registry-namespace>`" with your chosen namespace.
-2.  Create the namespace in IBM Cloud:
-    ```
-    bx cr login
-    bx cr namespace-add <registry-namespace>
-    ```
-3.  In a text editor, open the file at `kubernetes/lagom-message-hub-liberty-integration/bluemix/lagom-message-hub-liberty-integration-statefulset.json`
-4.  In that file, find the `"image"` key and update the value to use your chosen namespace: `"registry.ng.bluemix.net/<registry-namespace>/lagom/message-hub-liberty-integration-impl"`
-
-## Build the Docker image for IBM Cloud
+If you have IBM Cloud Container Registry set up as described in the other [document](deploy-with-bluemix.md#create-a-container-registry-namespace-in-ibm-cloud), please follow the steps:
 
 1.  Build the Docker image locally:
     ```
@@ -79,8 +38,9 @@ You will need to use a private container registry to provide the Docker image to
     docker tag lagom/message-hub-liberty-integration-impl registry.ng.bluemix.net/<registry-namespace>/lagom/message-hub-liberty-integration-impl
     docker push registry.ng.bluemix.net/<registry-namespace>/lagom/message-hub-liberty-integration-impl
     ```
+Or, you can use a public registry such as Docker Store. But you will have to change the tags in above commands to reflect the registry. Plus you will have to change all the kubernetes deployment files to reflect the path of the images.
 
-## Deploy Cassandra to IBM Cloud
+## Deploy Cassandra to ICP
 
 1.  If you are using an existing Kubernetes cluster, check if the Cassandra service has already been deployed:
     ```
@@ -117,7 +77,7 @@ You will need to use a private container registry to provide the Docker image to
     UN  172.17.0.4  99.47 KiB  32           100.0%            f4d1adaa-89d7-4726-8081-f7a15be676ee  Rack1-K8Demo
     ```
 
-## Deploy the Lagom service to IBM Cloud
+## Deploy the Lagom service to ICP
 
 1.  Create the Lagom service pod in Kubernetes:
     ```
@@ -173,30 +133,12 @@ From a WebSocket client, you can monitor the stream of messages that the Lagom s
 3.  Return to the Liberty application tab in your browser, and reload the page.
 4.  You should see the message you sent in the list of **Already consumed messages**.
 
-## Delete the Lagom service from IBM Cloud
+## Delete the Lagom service from ICP
 
-When you are finished testing the service in IBM Cloud, you can delete the service from the Kubernetes cluster.
+When you are finished testing the service in ICP, you can delete all the resources from the Kubernetes cluster.
 
-1.  If the `kubectl port-forward ...` command is still running, press control-C to exit it.
-1.  Delete the Lagom service resources from the Kubernetes cluster in IBM Cloud:
-    ```
-    kubectl delete statefulsets lagom-message-hub-liberty-integration --cascade=false
-    kubectl delete --ignore-not-found=true -f kubernetes/lagom-message-hub-liberty-integration/bluemix
-    ```
-    As noted above, only one instance of the Lagom service can consume messages from the Message Hub topic at a time, so if the service is left running in IBM Cloud, you will not be able to test it successfully in Minikube or the Lagom development environment.
-2.  (Optional) Delete the Cassandra service from the Kubernetes cluster:
-    ```
-    kubectl delete -f kubernetes/cassandra
-    ```
-3.  (Optional) Delete the Kubernetes cluster from IBM Cloud Container Service:
-    ```
-    bx cs cluster-rm lagom-test
-    ```
-    Keep in mind that this will remove *all* resources in the cluster, and that clusters can take a long time to recreate. Only delete the cluster when you are sure you won't need it again.
-4.  (Optional) Delete the namespace you created from IBM Cloud Container Registry:
-    ```
-    bx cr namespace-rm <registry-namespace>
-    ```
+1.  Run `kubectl delete all --all` to remove all the resources in current name space
+2.  (Optional) Remove the ICP installation
 
 ## Next steps
 
