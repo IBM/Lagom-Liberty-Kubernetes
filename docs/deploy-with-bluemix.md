@@ -202,5 +202,5 @@ When you are finished testing the service in IBM Cloud, you can delete the servi
 
 From here, you can try another option for running the example:
 
-- [Run in development mode](docs/run-in-development-mode.md)
-- [Deploy in IBM Cloud Private](docs/deploy-icp.md)
+- [Run in development mode](run-in-development-mode.md)
+- [Deploy in IBM Cloud Private](deploy-icp.md)
