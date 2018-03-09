@@ -9,11 +9,11 @@ This project demonstrates a simple service that integrates with the IBM Message 
 
 ## Flow
 ![architect](architect.png)
-1. Step 1.
-2. Step 2.
-3. Step 3.
-4. Step 4.
-5. Step 5.
+1. User sets up message hub
+2. User sets up Lagom service
+3. User edit and build the sample app in local Liberty server
+4. User deploys the app to IBM Cloud Container Service
+5. User deploys the app to IBM Cloud Private
 
 ## Included components
 
