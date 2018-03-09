@@ -78,3 +78,13 @@ Now that the project has been downloaded and configured, you can proceed to runn
 - [Run in development mode](docs/run-in-development-mode.md)
 - [Deploy to IBM Cloud Private](docs/deploy-with-icp.md)
 - [Deploy to IBM Cloud Container Service](docs/deploy-with-bluemix.md)
+
+## Links
+* [Lagom](https://www.lightbend.com/lagom-framework)     
+* [IBM Cloud Private](https://www.ibm.com/cloud-computing/products/ibm-cloud-private/)   
+* [IBM Cloud Container Service](https://www.ibm.com/cloud-computing/bluemix/containers)   
+* [IBM Liberty](https://developer.ibm.com/wasdev/websphere-liberty/)   
+* [Apache Kafka](https://kafka.apache.org/)    
+
+## License
+[Apache 2.0](LICENSE)
