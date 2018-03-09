@@ -16,19 +16,19 @@ This project demonstrates a simple service that integrates with the IBM Message 
 
 ## Included components
 
-[Lagom](https://www.lightbend.com/lagom-framework)
-[IBM Message Hub](https://www.ibm.com/software/products/en/ibm-message-hub)
-[IBM Cloud Private](https://www.ibm.com/cloud-computing/products/ibm-cloud-private/)
-[IBM Cloud Container Service](https://www.ibm.com/cloud-computing/bluemix/containers)
-[IBM Liberty](https://developer.ibm.com/wasdev/websphere-liberty/)
-[Apache Kafka](https://kafka.apache.org/)
+[Lagom](https://www.lightbend.com/lagom-framework)   
+[IBM Message Hub](https://www.ibm.com/software/products/en/ibm-message-hub)   
+[IBM Cloud Private](https://www.ibm.com/cloud-computing/products/ibm-cloud-private/)   
+[IBM Cloud Container Service](https://www.ibm.com/cloud-computing/bluemix/containers)   
+[IBM Liberty](https://developer.ibm.com/wasdev/websphere-liberty/)   
+[Apache Kafka](https://kafka.apache.org/)    
 
 ## Steps
 
-1.  [Prerequisites](#prerequisites)
-2.  [Gather Message Hub credentials](#gather-message-hub-credentials)
-3.  [Download and set up the Lagom service](#download-and-set-up-the-lagom-service)
-4.  [Next steps](#next-steps)
+1.  [Prerequisites](#prerequisites)   
+2.  [Gather Message Hub credentials](#gather-message-hub-credentials)  
+3.  [Download and set up the Lagom service](#download-and-set-up-the-lagom-service)   
+4.  [Next steps](#next-steps)   
 
 ## Prerequisites
 
