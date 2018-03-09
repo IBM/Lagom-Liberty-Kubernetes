@@ -6,6 +6,21 @@ Lagom is a framework for developing reactive microservices in Java or Scala. Cre
 
 This project demonstrates a simple service that integrates with the IBM Message Hub Kafka [Liberty sample application](https://github.com/ibm-messaging/message-hub-samples/tree/master/kafka-java-liberty-sample). The source code demonstrates how to write a Lagom service that can both consume messages produced by the Liberty sample application, and produce messages that can be consumed by it. You can run the service in a local development environment, a local Kubernetes cluster created using IBM Cloud Private [ICP](https://www.ibm.com/cloud-computing/products/ibm-cloud-private/), or in the cloud using [IBM Cloud Container Service](https://www.ibm.com/cloud-computing/bluemix/containers).
 
+
+## Flow
+1. Step 1.
+2. Step 2.
+3. Step 3.
+4. Step 4.
+5. Step 5.
+
+## Included components
+
+[Lagom](https://www.lightbend.com/lagom-framework)
+[IBM Message Hub](https://www.ibm.com/software/products/en/ibm-message-hub)
+[IBM Cloud Private](https://www.ibm.com/cloud-computing/products/ibm-cloud-private/)
+[IBM Cloud Container Service](https://www.ibm.com/cloud-computing/bluemix/containers)
+
 ## Steps
 
 1.  [Prerequisites](#prerequisites)
