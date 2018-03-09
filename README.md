@@ -8,6 +8,7 @@ This project demonstrates a simple service that integrates with the IBM Message 
 
 
 ## Flow
+![architect](architect.png)
 1. Step 1.
 2. Step 2.
 3. Step 3.
