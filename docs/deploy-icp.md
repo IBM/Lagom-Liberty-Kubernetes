@@ -38,7 +38,10 @@ If you have IBM Cloud Container Registry set up as described in the other [docum
     docker tag lagom/message-hub-liberty-integration-impl registry.ng.bluemix.net/<registry-namespace>/lagom/message-hub-liberty-integration-impl
     docker push registry.ng.bluemix.net/<registry-namespace>/lagom/message-hub-liberty-integration-impl
     ```
-Or, you can use a public registry such as Docker Store. But you will have to change the tags in above commands to reflect the registry. Plus you will have to change all the kubernetes deployment files to reflect the path of the images.
+Or, you can use a public registry such as Docker Store. 
+A third option is to install a private docker registry following the [instruction](https://www.ibm.com/developerworks/community/blogs/fe25b4ef-ea6a-4d86-a629-6f87ccf4649e/entry/Working_with_the_local_docker_registry_from_Spectrum_Conductor_for_Containers?lang=en).     
+
+In the latter two options, you will have to change the tags in above commands to reflect the registry of choice. Plus you will have to change all the kubernetes deployment files to reflect the path of the images.
 
 ## Deploy Cassandra to ICP
 
