@@ -31,6 +31,9 @@ This project demonstrates a simple service that integrates with the IBM Message 
 3.  [Download and set up the Lagom service](#download-and-set-up-the-lagom-service)   
 4.  [Next steps](#next-steps)   
 
+## Video on the pattern
+  [![Video](https://img.youtube.com/vi/gBT9vRWAWD4/0.jpg)](https://youtu.be/gBT9vRWAWD4)
+  
 ## Prerequisites
 
 To build and run this example, you need:
