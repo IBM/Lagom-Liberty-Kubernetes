@@ -38,7 +38,7 @@ In addition to the [prerequisites outlined in `README.md`](../README.md#prerequi
 
 These instructions assume you have already installed, configured and logged in with the IBM Cloud CLI tools. If you already have a cluster in IBM Cloud, you can reuse it and skip to the next section. If this is your first time using IBM Cloud Container Service, please see [the official documentation](https://console.bluemix.net/docs/containers/cs_cluster.html#cs_cluster_cli) for detailed instructions on setting up clusters.
 
-1.  Open a new command line shell to clear you environment, and change to the `lagom-message-hub-liberty-integration-example` directory.
+1.  Open a new command line shell to clear your environment, and change to the `lagom-message-hub-liberty-integration-example` directory.
 2.  Create a Lite Kubernetes cluster in IBM Cloud.
     ```
     bx cs cluster-create --name lagom-test
