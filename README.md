@@ -13,7 +13,7 @@ This project demonstrates a simple service that integrates with the IBM Message 
 2. User sets up Lagom service
 3. User edit and build the sample app in local Liberty server
 4. User deploys the app to IBM Cloud Container Service
-5. User deploys the app to IBM Cloud Private
+   OR User deploys the app to IBM Cloud Private
 
 ## Included components
 
