@@ -8,7 +8,7 @@ This project demonstrates a simple service that integrates with the IBM Message 
 
 
 ## Flow
-![architect](architect.png)
+![architect](http://developer.ibm.com/code/wp-content/uploads/sites/118/2018/06/architecture-lagom.png)
 1. User sets up message hub
 2. User sets up Lagom service
 3. User edit and build the sample app in local Liberty server
