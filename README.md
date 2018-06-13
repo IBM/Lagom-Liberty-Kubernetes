@@ -79,7 +79,7 @@ Follow these steps to get a local copy of this project and configure it with the
 Now that the project has been downloaded and configured, you can proceed to running it in any of these three ways:
 
 - [Run in development mode](docs/run-in-development-mode.md)
-- [Deploy to IBM Cloud Private](docs/deploy-with-icp.md)
+- [Deploy to IBM Cloud Private](docs/deploy-icp.md)
 - [Deploy to IBM Cloud Container Service](docs/deploy-with-bluemix.md)
 
 ## Links
